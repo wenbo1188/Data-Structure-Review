@@ -21,4 +21,12 @@ void traverse(sqlist *list);
 /* delete k numbers after pos i(including i) */
 int DeleteK(sqlist *list, int i, int k);
 
+/* compare two sqlist 
+ * Example:
+ *    if A = [1, 2], B = [1, 2, 1] then A < B
+ *    if A = [1, 2], B = [1, 3] then A < B
+ *    if A = [1, 2], B = [1, 2] then A = B
+ */
+int list_compare(sqlist *list1, sqlist *list2);
+
 #endif

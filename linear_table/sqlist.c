@@ -207,3 +207,73 @@ int DeleteK(sqlist *list, int i, int k)
 
 	return 0;
 }
+
+/* compare two sqlist 
+ * Example:
+ *    if A = [1, 2], B = [1, 2, 1] then A < B
+ *    if A = [1, 2], B = [1, 3] then A < B
+ *    if A = [1, 2], B = [1, 2] then A = B
+ * Return: 1 if list1 > list2
+ *         0 if list1 = list2
+ *         -1 if list1 < list2
+ */
+int list_compare(sqlist *list1, sqlist *list2)
+{
+	int i = 0;
+	int j = 0;
+	
+	if (!list1 || !list2)
+	{
+		printf("list is null\n");
+		return 0;
+	}
+
+	if (list1->cur_length == 0 && list2->cur_length == 0)
+	{
+		return 0;
+	}
+
+	if (list1->cur_length == 0 && list2->cur_length > 0)
+	{
+		return -1;
+	}
+
+	if (list2->cur_length == 0 && list1->cur_length > 0)
+	{
+		return 1;
+	}
+
+	while (i < list1->cur_length && j < list2->cur_length)
+	{
+		if (list1->table[i] == list2->table[j])
+		{
+			++i;
+			++j;
+			continue;
+		}
+
+		if (list1->table[i] > list2->table[j])
+		{
+			return 1;
+		}
+		else
+		{
+			return -1;
+		}
+	}
+
+	if (i == list1->cur_length && j == list2->cur_length)
+	{
+		return 0;
+	}
+
+	if (i < list1->cur_length && j == list2->cur_length)
+	{
+		return 1;
+	}
+
+	if (i == list1->cur_length && j < list2->cur_length)
+	{
+		return -1;
+	}
+}
