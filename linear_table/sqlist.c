@@ -163,7 +163,7 @@ int insert_elem_order(sqlist *list, int elem)
 	return 0;
 }
 
-void traverse(sqlist *list)
+void sqlist_traverse(sqlist *list)
 {
 	int i = 0;
 

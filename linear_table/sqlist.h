@@ -16,7 +16,7 @@ void destroy_table(sqlist *list);
 int list_empty(sqlist *list);
 int insert_elem(sqlist *list, int elem);
 int insert_elem_order(sqlist *list, int elem);
-void traverse(sqlist *list);
+void sqlist_traverse(sqlist *list);
 
 /* delete k numbers after pos i(including i) */
 int DeleteK(sqlist *list, int i, int k);
