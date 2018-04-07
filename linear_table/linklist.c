@@ -27,7 +27,7 @@ void destroy_linklist(linklist head)
 	return;
 }
 
-int insert_node(linklist head, linknode *node)
+int insert_node_withhead(linklist head, linknode *node)
 {
 	linklist p = NULL;
 
@@ -45,6 +45,35 @@ int insert_node(linklist head, linknode *node)
 
 	p->next = node;
 	node->next = NULL;
+}
+
+int insert_node_withouthead(linklist *head, linknode *node)
+{
+	linklist p = NULL;
+
+	if (!node)
+	{
+		printf("node is null\n");
+		return -1;
+	}
+
+	if (*head == NULL)
+	{
+		*head = node;
+	}
+	else
+	{
+		p = *head;
+		while (p->next)
+		{
+			p = p->next;
+		}
+
+		p->next = node;
+		node->next = NULL;
+	}
+
+	return 0;
 }
 
 void linklist_traverse(linklist head)
@@ -150,5 +179,132 @@ int linklist_link_two_list(linklist ha, int la, linklist hb, int lb, linklist *h
 	}
 
 	*hc = first;
+	return 0;
+}
+
+int insert_node_order(linklist head, linknode *node)
+{
+	linklist p = NULL;
+
+	if (!head || !node)
+	{
+		printf("head or node is null\n");
+		return -1;
+	}
+
+	p = head;
+	while (p->next && p->next->value < node->value)
+	{
+		p = p->next;
+	}
+
+	node->next = p->next;
+	p->next = node;
+
+	return 0;
+}
+
+int delete_between(linklist head, int mink, int maxk)
+{
+	linklist left = NULL;
+	linklist right = NULL;
+
+	if (!head)
+	{
+		printf("head is null\n");
+		return -1;
+	}
+
+	left = head;
+	right = head;
+
+	while (left->next && left->next->value <= mink)
+	{
+		left = left->next;
+	}
+
+	while (right->next && right->next->value < maxk)
+	{
+		right = right->next;
+	}
+
+	left->next = right->next;
+
+	return 0;
+}
+
+int delete_repeat_node(linklist head)
+{
+	linklist p = NULL;
+	linklist q = NULL;
+
+	if (!head)
+	{
+		printf("head is null\n");
+		return -1;
+	}
+
+	p = head->next;
+	q = p->next;
+	
+	while (p && q)
+	{
+		if (p->value != q->value)
+		{
+			p->next = q;
+			p = q;
+			q = q->next;
+		}
+		else
+		{
+			q = q->next;
+		}
+	}
+
+	p->next = NULL;
+	
+	return 0;
+}
+
+int linklist_reverse(linklist *head)
+{
+	linklist phead = NULL;
+	linklist left = NULL;
+	linklist right = NULL;
+	linklist tmp = NULL;
+
+	phead = *head;
+	if (!phead)
+	{
+		printf("head is null\n");
+		return -1;
+	}
+
+	left = phead->next;
+	if (!left)
+	{
+		printf("no node in linklist\n");
+		return 0;
+	}
+
+	right = left->next;
+	if (!right)
+	{
+		printf("only one node in linklist, no need to reverse\n");
+		return 0;
+	}
+
+	left->next = NULL;
+	while (right)
+	{
+		tmp = right->next;
+		right->next = left;
+		left = right;
+		right = tmp;
+	}
+
+	phead->next = left;
+	*head = phead;
+
 	return 0;
 }

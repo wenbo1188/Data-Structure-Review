@@ -29,4 +29,7 @@ int DeleteK(sqlist *list, int i, int k);
  */
 int list_compare(sqlist *list1, sqlist *list2);
 
+/* reverse a sqlist with no more memory */
+int list_reverse(sqlist *list);
+
 #endif

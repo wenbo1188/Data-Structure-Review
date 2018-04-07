@@ -277,3 +277,26 @@ int list_compare(sqlist *list1, sqlist *list2)
 		return -1;
 	}
 }
+
+int list_reverse(sqlist *list)
+{
+	int i = 0;
+	int tmp = 0;
+	int len = 0;
+
+	if (!list)
+	{
+		printf("list is null\n");
+		return -1;
+	}
+
+	len = list->cur_length;
+	for (i = 0;i < len/2;++i)
+	{
+		tmp = list->table[i];
+		list->table[i] = list->table[len - 1 - i];
+		list->table[len - 1 - i] = tmp;
+	}
+
+	return 0;
+}
