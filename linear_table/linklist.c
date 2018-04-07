@@ -308,3 +308,108 @@ int linklist_reverse(linklist *head)
 
 	return 0;
 }
+
+int linklist_cross_merge(linklist head1, linklist head2, linklist head3)
+{
+	linklist p1 = NULL;
+	linklist p2 = NULL;
+	linklist p3 = NULL;
+
+	if (!head1 || !head2 || !head3)
+	{
+		printf("head1, head2, or head3 is null\n");
+		return -1;
+	}
+
+	p1 = head1->next;
+	p2 = head2->next;
+	p3 = head3;
+
+	while (p1 && p2)
+	{
+		p3->next = p1;
+		p1 = p1->next;
+		p3->next->next = p2;
+		p2 = p2->next;
+		p3 = p3->next->next;
+	}
+
+	if (p1)
+	{
+		while (p1)
+		{
+			p3->next = p1;
+			p1 = p1->next;
+			p3 = p3->next;
+		}
+	}
+
+	if (p2)
+	{
+		while (p2)
+		{
+			p3->next = p2;
+			p2 = p2->next;
+			p3 = p3->next;
+		}
+	}
+
+	return 0;
+}
+
+int linklist_dsec_merge(linklist head1, linklist head2, linklist head3)
+{
+	linklist p1 = NULL;
+	linklist p2 = NULL;
+	linklist tmp = NULL;
+
+	if (!head1 || !head2 || !head3)
+	{
+		printf("head1, head2 or head3 is null\n");
+		return -1;
+	}
+
+	p1 = head1->next;
+	p2 = head2->next;
+
+	while (p1 && p2)
+	{
+		if (p1->value <= p2->value)
+		{
+			tmp = p1;
+			p1 = p1->next;
+		}
+		else
+		{
+			tmp = p2;
+			p2 = p2->next;
+		}
+
+		tmp->next = head3->next;
+		head3->next = tmp;
+	}
+
+	if (p1)
+	{
+		while (p1)
+		{
+			tmp = p1;
+			p1 = p1->next;
+			tmp->next = head3->next;
+			head3->next = tmp;
+		}
+	}
+
+	if (p2)
+	{
+		while (p2)
+		{
+			tmp = p2;
+			p2 = p2->next;
+			tmp->next = head3->next;
+			head3->next = tmp;
+		}
+	}
+
+	return 0;
+}

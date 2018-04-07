@@ -34,4 +34,16 @@ int delete_repeat_node(linklist head);
 /* reverse the linklist */
 int linklist_reverse(linklist *head);
 
+/* merge two lists in this way:
+ * A = [a1, a2, ..., am]
+ * B = [b1, b2, ..., bn]
+ * then 
+ * C = [a1, b1, a2, b2, ..., am, bm, bm+1, ..., bn] if n >= m
+ * C = [a1, b1, a2, b2, ..., an, bn, an+1, ..., am] if n < m
+ */
+int linklist_cross_merge(linklist head1, linklist head2, linklist head3);
+
+/* merge two lists in dsec order */
+int linklist_dsec_merge(linklist head1, linklist head2, linklist head3);
+
 #endif
