@@ -32,4 +32,10 @@ int list_compare(sqlist *list1, sqlist *list2);
 /* reverse a sqlist with no more memory */
 int list_reverse(sqlist *list);
 
+/* get set C whose elem both in set A and set B */
+int list_cross_set(sqlist *list1, sqlist *list2, sqlist *list3);
+
+/* delete elem in A where the elem both in B and C */
+int list_delete_common_elem(sqlist *list1, sqlist *list2, sqlist *list3);
+
 #endif

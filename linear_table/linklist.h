@@ -46,4 +46,10 @@ int linklist_cross_merge(linklist head1, linklist head2, linklist head3);
 /* merge two lists in dsec order */
 int linklist_dsec_merge(linklist head1, linklist head2, linklist head3);
 
+/* get C set whose elem both in set A and set B */
+int linklist_cross_set(linklist head1, linklist head2, linklist head3);
+
+/* delete elem in A where the elem both in B and C */
+int linklist_delete_common_elem(linklist head1, linklist head2, linklist head3);
+
 #endif

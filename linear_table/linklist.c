@@ -413,3 +413,100 @@ int linklist_dsec_merge(linklist head1, linklist head2, linklist head3)
 
 	return 0;
 }
+
+int linklist_cross_set(linklist head1, linklist head2, linklist head3)
+{
+	linknode node[10] = {0};
+	int index = 0;
+	linklist p1 = NULL;
+	linklist p2 = NULL;
+	
+	if (!head1 || !head2 || !head3)
+	{
+		printf("head1, head2 or head3 is null\n");
+		return -1;
+	}
+
+	p1 = head1->next;
+	p2 = head2->next;
+
+	while (p1 && p2)
+	{
+		if (p1->value == p2->value)
+		{
+			node[index].value = p1->value;
+			insert_node_withhead(head3, &node[index]);
+			index++;
+			p1 = p1->next;
+			p2 = p2->next;
+		}
+		else if (p1->value < p2->value)
+		{
+			p1 = p1->next;
+		}
+		else
+		{
+			p2 = p2->next;
+		}
+	}
+
+	linklist_traverse(head3);
+
+	return 0;
+}
+
+int linklist_delete_common_elem(linklist head1, linklist head2, linklist head3)
+{
+	linklist p1 = NULL;
+	linklist p2 = NULL;
+	linklist p3 = NULL;
+	linklist tmp = NULL;
+
+	if (!head1 || !head2 || !head3)
+	{
+		printf("head1, head2 or head3 is null\n");
+		return -1;
+	}
+
+	p1 = head1->next;
+	p2 = head2->next;
+	p3 = head3->next;
+	tmp = head1;
+
+	while (p1 && p2 && p3)
+	{
+		if (p2->value == p3->value)
+		{
+			while (p1 && p1->value < p2->value)
+			{
+				tmp = p1;
+				p1 = p1->next;
+			}
+
+			if (p1->value == p2->value)
+			{
+				while (p1 && p1->next && p1->next->value == p1->value)
+				{
+					p1 = p1->next;
+				}
+
+				tmp->next = p1->next;
+				tmp = p1;
+				p1 = p1->next;
+			}
+
+			p2 = p2->next;
+			p3 = p3->next;
+		}
+		else if (p2->value < p3->value)
+		{
+			p2 = p2->next;
+		}
+		else
+		{
+			p3 = p3->next;
+		}
+	}
+
+	return 0;
+}

@@ -300,3 +300,99 @@ int list_reverse(sqlist *list)
 
 	return 0;
 }
+
+int list_cross_set(sqlist *list1, sqlist *list2, sqlist *list3)
+{
+	int i = 0;
+	int j = 0;
+	int l1 = 0;
+	int l2 = 0;
+
+	if (!list1 || !list2 || !list3)
+	{
+		printf("list1, list2 or list3 is null\n");
+		return -1;
+	}
+
+	l1 = list1->cur_length;
+	l2 = list2->cur_length;
+
+	while (i < l1 && j < l2)
+	{
+		if (list1->table[i] == list2->table[j])
+		{
+			insert_elem(list3, list1->table[i]);
+			++i;
+			++j;
+		}
+		else if (list1->table[i] < list2->table[j])
+		{
+			++i;
+		}
+		else
+		{
+			++j;
+		}
+	}
+
+	return 0;
+}
+
+int list_delete_common_elem(sqlist *list1, sqlist *list2, sqlist *list3)
+{
+	int i = 0;
+	int j = 0;
+	int k = 0;
+	int l1 = 0;
+	int l2 = 0;
+	int l3 = 0;
+	int num = 0;
+
+	if (!list1 || !list2 || !list3)
+	{
+		printf("list1, list2 or list3 is null\n");
+		return -1;
+	}
+
+	l2 = list2->cur_length;
+	l3 = list3->cur_length;
+
+	while (i < list1->cur_length && j < l2 && k < l3)
+	{
+		if (list2->table[j] == list3->table[k])
+		{
+			while (i < list1->cur_length && list1->table[i] < list2->table[j])
+			{
+				++i;	
+			}
+
+			if (i >= list1->cur_length)
+			{
+				break;
+			}
+			else if (list1->table[i] == list2->table[j])
+			{
+				num = 1;
+				while ((i + 1) < list1->cur_length && list1->table[i + 1] == list1->table[i])
+				{
+					++i;
+					++num;
+				}
+				DeleteK(list1, i + 1, num);
+			}
+
+			++j;
+			++k;
+		}
+		else if (list2->table[j] < list3->table[k])
+		{
+			++j;
+		}
+		else
+		{
+			++k;
+		}
+	}
+
+	return 0;
+}
