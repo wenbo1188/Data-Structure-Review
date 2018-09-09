@@ -1,4 +1,7 @@
 *.o
 test.c
 test
+test.exe
 *.swp
+*.json
+.vscode/
